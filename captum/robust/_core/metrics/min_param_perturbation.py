@@ -10,6 +10,7 @@ from captum._utils.common import (
     _reduce_list,
 )
 from captum._utils.typing import TargetType
+from captum.log import log_usage
 from captum.robust._core.perturbation import Perturbation
 from torch import Tensor
 
@@ -117,7 +118,7 @@ class MinParamPerturbation:
                 any additional arguments should be provided through
                 ``correct_fn_kwargs``.
 
-                This function should have the following signature:
+                This function should have the following signature::
 
                     def correct_fn(model_out: Tensor, **kwargs: Any) -> bool
 
@@ -335,6 +336,7 @@ class MinParamPerturbation:
 
         return min_input, min_so_far
 
+    @log_usage()
     def evaluate(
         self,
         inputs: Any,
